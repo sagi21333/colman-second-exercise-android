@@ -25,10 +25,6 @@ public class Student {
         return address;
     }
 
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
     public String getId() {
         return id;
     }

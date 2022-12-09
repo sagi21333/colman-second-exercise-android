@@ -43,17 +43,19 @@ public class StudentRecyclerList extends AppCompatActivity {
         adapter = new StudentRecyclerAdapter();
         list.setAdapter(adapter);
 
+        Intent intentStudentDetails = new Intent(this, StudentDetails.class);
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                Log.d("TAG", "Row was clicked " + pos);
+                intentStudentDetails.putExtra("pos", pos);
+                startActivity(intentStudentDetails);
             }
         });
 
         Button btn = findViewById(R.id.studentRecycler_add_btn);
 
         btn.setOnClickListener(view -> {
-            Intent intent = new Intent(this,AddStudentActivity.class);
+            Intent intent = new Intent(this, AddStudentActivity.class);
             startActivity(intent);
         });
     }

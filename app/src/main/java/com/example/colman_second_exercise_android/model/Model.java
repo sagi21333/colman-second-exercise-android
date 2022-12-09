@@ -19,6 +19,8 @@ public class Model {
         return data;
     }
 
+    public static Student getStudent(int p) {return data.get(p);}
+    public static void deleteStudent(int p) {data.remove(p);}
     public static void addStudent(Student st){
         data.add(st);
     }
