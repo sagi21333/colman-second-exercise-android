@@ -20,8 +20,12 @@ public class EditStudent extends AppCompatActivity {
         setContentView(R.layout.activity_edit_student);
 
         Intent intent = getIntent();
-        Integer value = intent.getIntExtra("pos", 0);
+        Integer value = 0;
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            value = extras.getInt("pos");
+        }
         Student choosenStudent = Model.getStudent(value);
 
         EditText nameEditTxt = findViewById(R.id.editstudent_name_edittxt);
@@ -39,6 +43,7 @@ public class EditStudent extends AppCompatActivity {
 
         Button saveBtn = findViewById(R.id.editstudent_save_btn);
 
+        Integer finalValue = value;
         saveBtn.setOnClickListener(view -> {
             choosenStudent.setName(nameEditTxt.getText().toString());
             choosenStudent.setId(idEditTxt.getText().toString());
@@ -48,14 +53,15 @@ public class EditStudent extends AppCompatActivity {
             finish();
 
             Intent editPage = new Intent(this, StudentDetails.class);
-            editPage.putExtra("pos", value);
+            editPage.putExtra("pos", finalValue);
             startActivity(editPage);
         });
 
         Button deleteBtn = findViewById(R.id.editstudent_delete_btn);
 
+        Integer finalValue1 = value;
         deleteBtn.setOnClickListener(view -> {
-            Model.deleteStudent(value);
+            Model.deleteStudent(finalValue1);
             Intent studentListPage = new Intent(this, StudentRecyclerList.class);
             startActivity(studentListPage);
         });
